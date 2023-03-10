@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.core.text.isDigitsOnly
+import com.example.calc_code.utilits.AppButtonEnums
 
 class Blocker {
     private val blockedList : ArrayList<String> = arrayListOf();
@@ -168,11 +169,9 @@ class Blocker {
         canDotBeUnblocked = true;
     }
 
-    fun isBlocked(view: View) : Boolean {
-        if (view is Button){
-            return blockedList.contains(view.text.toString())
-        }
-        return true
+    fun isBlocked(enumValue : AppButtonEnums) : Boolean {
+        return blockedList.contains(enumValue.symbol.toString())
+
     }
 
     private fun blockNumsButtons(){
