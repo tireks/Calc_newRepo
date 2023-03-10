@@ -16,8 +16,9 @@ import com.example.calc_code.utilits.resultController
 
 
 class MainActivity : AppCompatActivity(),  View.OnClickListener {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var bindingPop: PopupWindowBinding
+    /*private lateinit var binding: ActivityMainBinding*/
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val bindingPop by lazy { PopupWindowBinding.inflate(layoutInflater) }
     private var bracketsCounter: Int = 0
     private var blocker: Blocker = Blocker()
     private var cheker: Cheker = Cheker()
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity(),  View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        //binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         blocker.startInputBlock()
         binding.equButton.setOnClickListener(this)
@@ -74,7 +75,6 @@ class MainActivity : AppCompatActivity(),  View.OnClickListener {
     }
 
     private fun showPopUp(warnString: String, view: View, errorCode : Int) : PopupWindow{
-        bindingPop = PopupWindowBinding.inflate(layoutInflater)
         bindingPop.myTV.text = warnString
         val wid = LinearLayout.LayoutParams.WRAP_CONTENT
         val high = LinearLayout.LayoutParams.WRAP_CONTENT
