@@ -1,12 +1,10 @@
 package com.example.calc_code
-import android.content.Context
-import android.graphics.drawable.BitmapDrawable
+
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity

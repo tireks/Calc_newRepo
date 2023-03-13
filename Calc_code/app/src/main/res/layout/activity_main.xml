@@ -19,12 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTopBlock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.875" />
 
     <TextView
         android:id="@+id/TV_input"
@@ -34,20 +28,21 @@
         android:lines="2"
         android:textAlignment="textEnd"
         android:textSize="35sp"
-        app:layout_constraintEnd_toStartOf="@id/guidelineTopBlock"
+        app:layout_constraintHorizontal_weight="10"
+        app:layout_constraintEnd_toStartOf="@id/delButton"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TV_result" />
 
     <ImageButton
         android:id="@+id/delButton"
         style="@style/buttonSpecNew"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
         android:src="@drawable/button_backspace_pic"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintBottom_toBottomOf="@id/TV_input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guidelineTopBlock"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/TV_input"
         app:layout_constraintTop_toBottomOf="@id/TV_result" />
 
     <Button
@@ -76,9 +71,9 @@
         android:text="@string/buttonBracketLeftStr"
         app:layout_constraintBottom_toTopOf="@+id/Button3"
         app:layout_constraintEnd_toStartOf="@+id/bracketRightButton"
-        app:layout_constraintStart_toStartOf="@id/Button3"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@id/Button3"
         app:layout_constraintTop_toBottomOf="@+id/TV_input"
         app:layout_constraintVertical_bias="0.5" />
 
@@ -116,10 +111,10 @@
         style="@style/buttonNumb"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginStart="8dp"
         android:text="@string/buttonNum1Str"
         app:layout_constraintBottom_toTopOf="@+id/Button4"
         app:layout_constraintEnd_toStartOf="@+id/Button2"
@@ -180,8 +175,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
         android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/buttonNum2Str"
         app:layout_constraintBottom_toTopOf="@+id/Button5"
         app:layout_constraintEnd_toStartOf="@+id/Button3"
@@ -238,10 +233,10 @@
         style="@style/buttonNumb"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/buttonNum3Str"
         app:layout_constraintBottom_toTopOf="@+id/Button6"
         app:layout_constraintEnd_toStartOf="@+id/plusButton"
@@ -296,10 +291,10 @@
         style="@style/buttonOp"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/buttonOpPlusStr"
         app:layout_constraintBottom_toTopOf="@+id/minusButton"
         app:layout_constraintEnd_toEndOf="parent"
