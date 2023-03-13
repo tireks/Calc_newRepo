@@ -12,11 +12,7 @@ class Blocker {
     private val blockedList : ArrayList<String> = arrayListOf();
     private var bracketCounter : Int = 0;
     private var canDotBeUnblocked : Boolean = true;
-    //var buttonSet = ButtonSet
 
-    private fun viewConverter(view: View){
-
-    }
     private fun blockButton(buttonContent: String){
         if (!blockedList.contains(buttonContent)){
             blockedList.add(buttonContent)

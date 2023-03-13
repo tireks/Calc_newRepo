@@ -17,5 +17,6 @@ enum class AppButtonEnums (val symbol: Char) {
     Bminus('-'),
     Bdivide('/'),
     BleftBracket('('),
-    BrightBracket(')')
+    BrightBracket(')'),
+    Bequ('=')
 }
