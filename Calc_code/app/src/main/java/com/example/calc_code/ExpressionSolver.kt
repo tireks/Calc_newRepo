@@ -1,8 +1,5 @@
 package com.example.calc_code
 
-import kotlin.math.nextDown
-import kotlin.math.nextTowards
-
 class ExpressionSolver {
     private var inputStr : String = ""
 
@@ -23,19 +20,16 @@ class ExpressionSolver {
             }
         }
     }
-    fun solveExpression(inputExpression: String): Double { // string- временно, пока тестирую и нет вычислений
+    fun solveExpression(inputExpression: String): Double {
         setInputString(inputExpression)
-        /*var PRNexpression: String = makePRN()
-        return calculate(PRNexpression)*/
         unaryMinusController()
         return calculate(makePRN())
-        //return  makePRN()
     }
 
     private fun makePRN() : String{
         var output = ""
         val operStack: ArrayDeque<String> = ArrayDeque()
-        var flagOnDigit : Boolean = false
+        var flagOnDigit = false
         var tempChar = ""
         for (charIndex in inputStr.indices){
             tempChar = inputStr[charIndex].toString()

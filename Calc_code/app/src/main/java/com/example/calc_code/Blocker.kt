@@ -1,21 +1,13 @@
 package com.example.calc_code
-import android.graphics.Color
-//import com.tirex_projs.Calc_new.databinding.ActivityMainBinding;
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.View
-import android.widget.Button
+
 import androidx.core.text.isDigitsOnly
+import com.example.calc_code.utilits.AppButtonEnums
 
 class Blocker {
     private val blockedList : ArrayList<String> = arrayListOf();
     private var bracketCounter : Int = 0;
     private var canDotBeUnblocked : Boolean = true;
-    //var buttonSet = ButtonSet
 
-    private fun viewConverter(view: View){
-
-    }
     private fun blockButton(buttonContent: String){
         if (!blockedList.contains(buttonContent)){
             blockedList.add(buttonContent)
@@ -27,71 +19,113 @@ class Blocker {
         }
     }
 
+   fun repetativeBlockController(block : String,
+                            leftBrListener : Boolean,
+                            rightBrListener : Boolean,
+                            equListener : Boolean,
+                            dotListener : Boolean){
+        when (block){
+            "nums" -> {
+                blockButton("0")
+                blockButton("1")
+                blockButton("2")
+                blockButton("3")
+                blockButton("4")
+                blockButton("5")
+                blockButton("6")
+                blockButton("7")
+                blockButton("8")
+                blockButton("9")
+            }
+            "ops" -> {
+                blockButton("+")
+                blockButton("-")
+                blockButton("x")
+                blockButton("/")
+                if (leftBrListener){
+                    blockButton("(")
+                }
+                if (rightBrListener){
+                    blockButton(")")
+                }
+                if (equListener){
+                    blockButton("=")
+                }
+                if (dotListener){
+                    blockButton(".")
+                }
+            }
+        }
+    }
+    fun repetativeUnblockController(block : String,
+                                  leftBrListener : Boolean,
+                                  rightBrListener : Boolean,
+                                  equListener : Boolean,
+                                  dotListener : Boolean){
+        when (block){
+            "nums" -> {
+                unblockButton("0")
+                unblockButton("1")
+                unblockButton("2")
+                unblockButton("3")
+                unblockButton("4")
+                unblockButton("5")
+                unblockButton("6")
+                unblockButton("7")
+                unblockButton("8")
+                unblockButton("9")
+            }
+            "ops" -> {
+                unblockButton("+")
+                unblockButton("-")
+                unblockButton("x")
+                unblockButton("/")
+                if (leftBrListener){
+                    unblockButton("(")
+                }
+                if (rightBrListener){
+                    unblockButton(")")
+                }
+                if (equListener){
+                    unblockButton("=")
+                }
+                if (dotListener){
+                    unblockButton(".")
+                }
+            }
+        }
+    }
+
     fun smartBlocker(viewContent: String) {
         if (viewContent.isDigitsOnly()) {
             blockButton("(")
         } else when (viewContent) {
             "." -> {
-                blockButton("(")
-                blockButton(")")
-                blockButton("+")
-                blockButton("-")
-                blockButton("x")
-                blockButton("/")
-                blockButton("=")
-                blockButton(".")
+                repetativeBlockController("ops", leftBrListener = true, rightBrListener = true, equListener = true, dotListener = true)
             }
             "(" -> {
-                blockButton("+")
-                blockButton("x")
-                blockButton("/")
-                blockButton("=")
-                blockButton(".")
-                blockButton("(")
+                repetativeBlockController("ops", leftBrListener = true, rightBrListener = false, equListener = true, dotListener = true)
+                unblockButton("-")
                 bracketCounter++;
             }
             ")" -> {
                 blockButton(".")
                 blockButton("(")
-                blockNumsButtons()
+                repetativeBlockController("nums", leftBrListener = false, rightBrListener = false, equListener = false, dotListener = false)
                 bracketCounter--;
             }
             "x" -> {
-                blockButton(".")
-                blockButton("=")
-                blockButton("+")
-                blockButton("-")
-                blockButton("/")
-                blockButton("x")
-                blockButton(")")
+                repetativeBlockController("ops", leftBrListener = false, rightBrListener = true, equListener = true, dotListener = true)
 
             }
             "/" -> {
-                blockButton(".")
-                blockButton("=")
-                blockButton("+")
-                blockButton("-")
-                blockButton("X")
-                blockButton("/")
-                blockButton(")")
+                repetativeBlockController("ops", leftBrListener = false, rightBrListener = true, equListener = true, dotListener = true)
             }
             "+" -> {
-                blockButton(".")
-                blockButton("=")
-                blockButton("-")
-                blockButton("x")
-                blockButton("/")
-                blockButton("+")
-                blockButton(")")
+                repetativeBlockController("ops", leftBrListener = false, rightBrListener = true, equListener = true, dotListener = true)
             }
             "-" -> {
-                blockButton(".")
-                blockButton("=")
-                blockButton("+")
-                blockButton("x")
-                blockButton("/")
-                blockButton("-")
-                blockButton(")")
+                repetativeBlockController("ops", leftBrListener = false, rightBrListener = true, equListener = true, dotListener = true)
             }
         }
         if (bracketCounter <= 0) {
@@ -101,11 +135,7 @@ class Blocker {
 
     fun smartUnblocker(viewContent: String) {
         if (viewContent.isDigitsOnly()) {
-            unblockButton("=")
-            unblockButton("/")
-            unblockButton("x")
-            unblockButton("+")
-            unblockButton("-")
+            repetativeUnblockController("ops", leftBrListener = false, rightBrListener = false, equListener = true, dotListener = false)
             if (canDotBeUnblocked) {
                 unblockButton(".")
                 canDotBeUnblocked = false
@@ -120,33 +150,29 @@ class Blocker {
                     unblockButton("(")
                 }
                 ")" -> {
-                    unblockButton("/")
-                    unblockButton("x")
-                    unblockButton("+")
-                    unblockButton("-")
-                    unblockButton("=")
+                    repetativeUnblockController("ops", leftBrListener = false, rightBrListener = false, equListener = true, dotListener = false)
                     if (bracketCounter > 0) {
                         unblockButton(")")
                     }
                 }
                 "+" -> {
                     unblockButton("(")
-                    unblockNumsButtons()
+                    repetativeUnblockController("nums", leftBrListener = false, rightBrListener = false, equListener = false, false)
                     canDotBeUnblocked = true
                 }
                 "-" -> {
                     unblockButton("(")
-                    unblockNumsButtons()
+                    repetativeUnblockController("nums", leftBrListener = false, rightBrListener = false, equListener = false, false)
                     canDotBeUnblocked = true
                 }
                 "x" -> {
                     unblockButton("(")
-                    unblockNumsButtons()
+                    repetativeUnblockController("nums", leftBrListener = false, rightBrListener = false, equListener = false, false)
                     canDotBeUnblocked = true
                 }
                 "/" -> {
                     unblockButton("(")
-                    unblockNumsButtons()
+                    repetativeUnblockController("nums", leftBrListener = false, rightBrListener = false, equListener = false, false)
                     canDotBeUnblocked = true
                 }
             }
@@ -156,49 +182,17 @@ class Blocker {
 
     fun startInputBlock(){
         blockedList.clear()
-        blockButton(".")
-        blockButton("=")
-        blockButton("+")
-        blockButton("x")
-        blockButton("/")
-        blockButton(")")
-        unblockNumsButtons()
+        repetativeBlockController("ops", leftBrListener = false, rightBrListener = true, equListener = true, dotListener = true)
+        repetativeUnblockController("nums", leftBrListener = false, rightBrListener = false, equListener = false, false)
         unblockButton("(")
+        unblockButton("-")
         bracketCounter = 0;
         canDotBeUnblocked = true;
     }
 
-    fun isBlocked(view: View) : Boolean {
-        if (view is Button){
-            return blockedList.contains(view.text.toString())
-        }
-        return true
-    }
+    fun isBlocked(enumValue : AppButtonEnums) : Boolean {
+        return blockedList.contains(enumValue.symbol.toString())
 
-    private fun blockNumsButtons(){
-        blockButton("0")
-        blockButton("1")
-        blockButton("2")
-        blockButton("3")
-        blockButton("4")
-        blockButton("5")
-        blockButton("6")
-        blockButton("7")
-        blockButton("8")
-        blockButton("9")
-    }
-
-    private fun unblockNumsButtons(){
-        unblockButton("0")
-        unblockButton("1")
-        unblockButton("2")
-        unblockButton("3")
-        unblockButton("4")
-        unblockButton("5")
-        unblockButton("6")
-        unblockButton("7")
-        unblockButton("8")
-        unblockButton("9")
     }
 
     fun symbolicBlocker(symbol: String, symbolDeleted: String) {
